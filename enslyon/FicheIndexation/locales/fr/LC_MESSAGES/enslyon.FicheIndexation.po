@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-10-16 11:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Vutheany LOCH <vutheany.loch@ens-lyon.fr>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: enslyon.FicheIndexation\n"
+
+msgid "help_DocumentTypePeda"
+msgstr "S&eacute;lectionner un ou des type(s) p&eacute;dagogique(s)."
+
+msgid "help_cycleAuthor"
+msgstr "Saisir les informations concernant le ou les auteur(s) par ligne en respectant la structure suivante : Pr&eacute;nom Nom|Organisme(s) s&eacute;par&eacute; par ';'."
+
+msgid "help_cycleContributeur"
+msgstr "Saisir les informations concernant le ou les contributeur(s) par ligne en respectant la structure suivante : Pr&eacute;nom Nom|Organisme(s) s&eacute;par&eacute; par ';'."
+
+msgid "help_cycleEditeur"
+msgstr "Saisir les informations concernant l'&eacute;diteur en respectant la structure suivante : Pr&eacute;nom Nom|Organisme(s) s&eacute;par&eacute; par ';'."
+
+msgid "help_classifications"
+msgstr "Coller ici les balises Classification g&eacute;n&eacute;r&eacute;es par genClass : http://unis.ens-lyon.fr/activites/indexation/taxonomies/select_taxons"
+
+msgid "help_genDescription"
+msgstr "Une description ou un r&eacute;sum&eacute; de la ressource."
+
+msgid "help_genDocumentType"
+msgstr "S&eacute;lectionner un ou des type(s) documentaire(s) ou types de m&eacute;dias."
+
+msgid "help_genIdenEntry"
+msgstr "L'URL de la ressource. Exemple :'http://acces.inrp.fr/acces/terre/paleo/variations/paleoclimats/accueil.htm.'"
+
+msgid "help_genKeywords"
+msgstr "Saisir un mot ou un groupe de mots par ligne."
+
+msgid "label_DocumentTypePeda"
+msgstr "Type(s) pédagogique(s)"
+
+msgid "label_classifications"
+msgstr "Lom:classification"
+
+msgid "label_cycleAuthor"
+msgstr "Auteur(s) de la ressource"
+
+msgid "label_cycleContributeur"
+msgstr "Contributeur(s)"
+
+msgid "label_cycleEditeur"
+msgstr "Editeur (Publisher)"
+
+msgid "label_genIdenEntry"
+msgstr "Adresse de la ressource"
+
+msgid "label_genDescription"
+msgstr "Résumé"
+
+msgid "label_genDocumentType"
+msgstr "Type(s) de documents (types de médias)"
+
+msgid "label_genKeywords"
+msgstr "Mot(s) clé(s)"
+

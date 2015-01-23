@@ -1,0 +1,13 @@
+/*
+** Fiche Indexation CSS
+*/
+div#archetypes-fieldname-documentTypePeda.field.ArchetypesMultiSelectionWidget{
+    float:right;
+    clear:right;
+}
+div#archetypes-fieldname-genDocumentType.field.ArchetypesMultiSelectionWidget{
+    float:left;
+}
+pre.IndexationContentXML{
+background:#fff;
+}

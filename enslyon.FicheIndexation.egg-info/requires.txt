@@ -1,0 +1,5 @@
+setuptools
+Products.ATExtensions
+
+[tests]
+zope.testing

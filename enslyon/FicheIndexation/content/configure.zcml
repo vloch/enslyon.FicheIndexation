@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="enslyon.FicheIndexation">
+
+  <!-- configure your content components here -->
+  
+  <class class=".ficheindexation.ficheIndexation">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ficheindexation.IficheIndexation"
+        />
+     <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.ficheindexation.IficheIndexation"
+        />
+  </class>
+
+</configure>

@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="enslyon.FicheIndexation">
+
+  <include package="plone.app.contentmenu" />
+
+ <browser:page
+        name="xml view"
+        for="enslyon.FicheIndexation.interfaces.ficheindexation.IficheIndexation"     
+        permission="zope2.View"
+        template="fi_xml_view.pt"
+        />
+ <browser:page
+        name="xml download"
+        for="enslyon.FicheIndexation.interfaces.ficheindexation.IficheIndexation"     
+        permission="zope2.View"
+        template="fi_xml_download.pt"
+        />
+
+</configure>
+<!-- enslyon.FicheIndexation.interfaces.ficheindexation.IficheIndexation 
+layer="enslyon.FicheIndexation.interfaces.ficheindexation.IficheIndexationSpecific"
+-->
