@@ -35,6 +35,8 @@ from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes.lib.historyaware import HistoryAwareMixin
 
+from Products.ATExtensions.ateapi import FormattableNamesField
+from Products.ATExtensions.ateapi import FormattableNamesWidget
 
 from Products.Archetypes.utils import contentDispositionHeader
 
