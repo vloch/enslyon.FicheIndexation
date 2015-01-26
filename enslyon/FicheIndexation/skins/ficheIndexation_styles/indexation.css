@@ -9,5 +9,9 @@ div#archetypes-fieldname-genDocumentType.field.ArchetypesMultiSelectionWidget{
     float:left;
 }
 pre.IndexationContentXML{
-background:#fff;
+	background:#fff;
+}
+.outils{
+	float: right;
+    margin-left: 8px;
 }
