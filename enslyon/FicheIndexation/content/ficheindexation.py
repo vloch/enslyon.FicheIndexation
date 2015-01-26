@@ -189,9 +189,9 @@ ficheIndexationSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         required = 1,
         minimalSize = 1,
         subfields=('firstnames','lastname', 'organisme'),
-        subfield_sizes={'firstnames':50, 'lastname':50, 'organisme':50},
-        subfield_labels={'username':'Auteurs'},
-        subfield_maxlength={'organisme': 500,},
+        subfield_sizes={'firstnames':30, 'lastname':30, 'organisme':50},
+        subfield_labels={'firstnames':'Prénom', 'lastname':'Nom', 'organisme':'Organisme'},
+        subfield_maxlength={'organismes': 500,},
         is_duplicates_criterion=True,
         widget=FormattableNamesWidget(label="Authors",
             label_msgid="label_authors",
@@ -207,8 +207,8 @@ ficheIndexationSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         required = 1,
         minimalSize = 1,
         subfields=('firstnames','lastname', 'organisme'),
-        subfield_sizes={'firstnames':50, 'lastname':50, 'organisme':50},
-        subfield_labels={'username':'Auteurs'},
+        subfield_sizes={'firstnames':30, 'lastname':30, 'organisme':50},
+        subfield_labels={'firstnames':'Prénom', 'lastname':'Nom', 'organisme':'Organisme'},
         subfield_maxlength={'organisme': 500,},
         is_duplicates_criterion=True,
         widget=FormattableNamesWidget(label="Contributors",
@@ -298,7 +298,7 @@ schemata.finalizeATCTSchema(ficheIndexationSchema, moveDiscussion=False)
 class ficheIndexation(base.ATCTContent, HistoryAwareMixin):
     """Fiche Indexation Content Type"""
     implements(IficheIndexation, IDAVAware)
-
+	
     meta_type = "ficheIndexation"
     schema = ficheIndexationSchema
     portal_type    = 'ficheIndexation'
@@ -324,6 +324,15 @@ class ficheIndexation(base.ATCTContent, HistoryAwareMixin):
         langue=self['lomLangue']
         #langue='fre'
         #Gestion des types de documents (médias)
+        mt = getToolByName(self, 'portal_membership')
+        user=mt.getAuthenticatedMember()
+        logger=user.getProperty('fullname')
+        if logger and logger.find(" ")!=-1:
+            loggerNom=logger.split(" ")[1]
+            loggerPrenom=logger.split(" ")[0]
+        else:
+            loggerNom=logger
+            loggerPrenom=logger
         if self['ResourcePublishedDate']:
             datePubRessource=self['ResourcePublishedDate'].strftime("%Y-%m-%d")
         else:
@@ -547,15 +556,15 @@ class ficheIndexation(base.ATCTContent, HistoryAwareMixin):
             </lom:role>
             <lom:entity>BEGIN:VCARD 
                  VERSION:3.0
-                 N:Pfalzgraf;Axel;;;
-                 FN:Axel Pfalzgraf
+                 N:%s;%s;;;
+                 FN:%s
                  %s
                  END:VCARD
             </lom:entity>
             <lom:date>
                 <lom:dateTime>%s</lom:dateTime>
             </lom:date>
-        </lom:contribute>""" % (orgEdit, pubDate)
+        </lom:contribute>""" % (loggerNom, loggerPrenom, logger,orgEdit, pubDate)
 #        % (NomPrenom[1], NomPrenom[0], validateurInfo[0], validateurInfo[1], validateurInfo[2],)
         xml_content += """
         <lom:metadataSchema>LOMv1.0</lom:metadataSchema>
