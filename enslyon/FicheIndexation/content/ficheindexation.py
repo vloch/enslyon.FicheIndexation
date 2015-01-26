@@ -35,6 +35,8 @@ from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes.lib.historyaware import HistoryAwareMixin
 
+from Products.ATExtensions.ateapi import FormattableNamesField
+from Products.ATExtensions.ateapi import FormattableNamesWidget
 
 from Products.Archetypes.utils import contentDispositionHeader
 
@@ -182,28 +184,41 @@ ficheIndexationSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 			description = _(u'help_ResourcePublishedDate', default=u"Indiquer ici la date de publication de la ressource"),
         ),
     ),
-    LinesField('cycleAuthor',
-               languageIndependent=True,
-               required=True,
-               searchable=False,
-               default="Thierry Lhuillier|Université de Lyon;ENS Lyon",
-               write_permission=ModifyPortalContent,
-               widget=LinesWidget(
-                      description = _(u'help_cycleAuthor',
-                                        default=u"Type the informations about author(s) line by line follwing the structure below : Firstname;Name|Organisation1;Organisation2;Organisation3"),
-                      label=_(u'label_cycleAuthor', default=u'Resource Creator(s)'),
-                      )),
-    LinesField('cycleContributeur',
-               languageIndependent=True,
-               required=False,
-               searchable=False,
-               default="Pierre Thomas|Université de Lyon;ENS Lyon",
-               write_permission=ModifyPortalContent,
-               widget=LinesWidget(
-                      description = _(u'help_cycleContributeur',
-                                        default=u"Type the informations about author(s) line by line follwing the structure below : Firstname;Name|Organisation1;Organisation2;Organisation3"),
-                      label=_(u'label_cycleContributeur', default=u'Contributor(s)'),
-                      )),
+    FormattableNamesField('authors',
+        searchable = 1,
+        required = 1,
+        minimalSize = 1,
+        subfields=('firstnames','lastname', 'organisme'),
+        subfield_sizes={'firstnames':50, 'lastname':50, 'organisme':50},
+        subfield_labels={'username':'Auteurs'},
+        subfield_maxlength={'organisme': 500,},
+        is_duplicates_criterion=True,
+        widget=FormattableNamesWidget(label="Authors",
+            label_msgid="label_authors",
+            macro_edit = "authors_widget",
+            helper_js = ('authors_widget.js',),	
+            description="Type the informations about author(s) line by line follwing the structure below for the organisations : Organisation1;Organisation2;Organisation3",
+            description_msgid="help_authors",
+        ) ,
+    ),
+
+    FormattableNamesField('contributeurs',
+        searchable = 1,
+        required = 1,
+        minimalSize = 1,
+        subfields=('firstnames','lastname', 'organisme'),
+        subfield_sizes={'firstnames':50, 'lastname':50, 'organisme':50},
+        subfield_labels={'username':'Auteurs'},
+        subfield_maxlength={'organisme': 500,},
+        is_duplicates_criterion=True,
+        widget=FormattableNamesWidget(label="Contributors",
+            label_msgid="label_contributeurs",
+            macro_edit = "authors_widget",
+            helper_js = ('authors_widget.js',),	
+            description="Type the informations about contributor(s) line by line follwing the structure below for the organisations : Organisation1;Organisation2;Organisation3",
+            description_msgid="help_contributors",
+        ) ,
+    ),
 #    LinesField('cycleEditeur',
 #               languageIndependent=True,
 #               required=True,
@@ -427,16 +442,12 @@ class ficheIndexation(base.ATCTContent, HistoryAwareMixin):
             <lom:value>final</lom:value>
         </lom:status>"""
         
-        auteurs=self['cycleAuthor']
+        auteurs=self['authors']
         for auteur in auteurs:
-            auteurInfo=auteur.split("|")
-            if auteurInfo[1]=='':
-               org=';'
-            elif auteurInfo[1].find(';')==-1:
-               org=auteurInfo[1]+';'
-            else:
-               org=auteurInfo[1]
-            NomPrenom=auteurInfo[0].split(" ")
+            nom=auteur['lastname']
+            prenom=auteur['firstname']
+            fullname=auteur
+            org=auteur['organisme']
             xml_content += """
         <lom:contribute>
             <lom:role>
@@ -453,7 +464,7 @@ class ficheIndexation(base.ATCTContent, HistoryAwareMixin):
             <lom:date>
                 <lom:dateTime>%s</lom:dateTime>
             </lom:date>
-        </lom:contribute> """ % (NomPrenom[1], NomPrenom[0], auteurInfo[0], org, datePubRessource)
+        </lom:contribute> """ % (nom, prenom, fullname, org, datePubRessource)
         
         #editeurs=self['cycleEditeur']
         #for editeur in editeurs:
@@ -481,16 +492,12 @@ class ficheIndexation(base.ATCTContent, HistoryAwareMixin):
                 <lom:dateTime>%s</lom:dateTime>
             </lom:date>
         </lom:contribute> """ % (publisher.strip(), datePubRessource)
-        contributeurs=self['cycleContributeur']
-        for contributeur in contributeurs:
-            contributeurInfo=contributeur.split("|")
-            if contributeurInfo[1]=='':
-               orgContribute=';'
-            elif contributeurInfo[1].find(';')==-1:
-               orgContribute=contributeurInfo[1]+';'
-            else:
-               orgContribute=contributeurInfo[1]
-            NomPrenom=contributeurInfo[0].split(" ")
+        contributeurs=self['contributeurs']
+        for c in contributeurs:
+            nomC=c['lastname']
+            prenomC=c['firstname']
+            fullnameC=c
+            orgC=c['organisme']
             xml_content += """
         <lom:contribute>
             <lom:role>
@@ -507,7 +514,7 @@ class ficheIndexation(base.ATCTContent, HistoryAwareMixin):
             <lom:date>
                 <lom:dateTime>%s</lom:dateTime>
             </lom:date>
-        </lom:contribute> """ % (NomPrenom[1], NomPrenom[0], contributeurInfo[0], orgContribute, datePubRessource)
+        </lom:contribute> """ % (nomC, prenomC, fullnameC, orgC, datePubRessource)
         xml_content += """
     </lom:lifeCycle>
     <lom:metaMetadata>

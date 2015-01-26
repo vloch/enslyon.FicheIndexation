@@ -4,11 +4,12 @@
     i18n_domain="enslyon.FicheIndexation">
 
   <!-- File System Directory Views registration -->
-  <cmf:registerDirectory name="ficheIndexation_styles"/>
+  <!--cmf:registerDirectory name="ficheIndexation_styles"/>
+  <cmf:registerDirectory name="ficheIndexation_templates"/-->
 
   <!-- Note: This could also be done for all folders at once
        by replacing the previous lines with this one:-->
-  <!--cmf:registerDirectory name="skins" directory="skins" recursive="True" /-->
+  <cmf:registerDirectory name="skins" directory="skins" recursive="True" />
   
 
 </configure>

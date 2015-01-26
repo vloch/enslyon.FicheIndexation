@@ -3,10 +3,15 @@
  <object name="ficheIndexation_styles"
     meta_type="Filesystem Directory View"
     directory="enslyon.FicheIndexation:skins/ficheIndexation_styles" />
+ <object name="ficheIndexation_templates"
+    meta_type="Filesystem Directory View"
+    directory="enslyon.FicheIndexation:skins/ficheIndexation_templates" />
 
  <skin-path name="*">
   <layer name="ficheIndexation_styles"
      insert-after="custom"/>
+  <layer name="ficheIndexation_templates"
+     insert-after="ficheIndexation_styles"/>
  </skin-path>
 
 </object>
