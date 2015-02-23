@@ -67,6 +67,7 @@ DOCUMENTS_PEDAS=DisplayList((
             ('question-None','Question du mois'),
             ('imageDeLaSemaine-None','Image de la semaine'),
             ('entretien-None', 'Entretien'),
+			('bibliographie-None', 'Bibliographie ou ressources classées'),
             ))
             
 FORMATS_RESSOURCE =  DisplayList((
